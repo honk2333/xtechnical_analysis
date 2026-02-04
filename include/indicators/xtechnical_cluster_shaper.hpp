@@ -5,12 +5,12 @@
 
 namespace xtechnical {
 
-	/** \brief Формирователь Кластеров
+	/** \brief 集群形成器
 	 */
 	class ClusterShaper {
 	public:
 
-		/** \brief Кластер
+		/** \brief 集群
 		*/
 		class Cluster {
 		public:
@@ -107,21 +107,21 @@ namespace xtechnical {
 	public:
 		ClusterShaper() {};
 
-		/** \brief Инициализировать формирователь баров
-		 * \param p		Период индикатора в секундах
-		 * \param ps	Точность цены, например 0.00001
-		 * \param ubst	Флаг, включает использование последней метки времени бара вместо начала бара, как времени бара
+		/** \brief 初始化集群形成器
+		 * \param p		指标周期（秒）
+		 * \param ps		价格精度，例如 0.00001
+		 * \param ubst	标志，启用使用柱线结束时间而非开始时间作为柱线时间
 		 */
 		ClusterShaper(const size_t p, const double ps, const bool ubst = false) :
 			period(p), pips_size(ps), is_use_bar_stop_time(ubst)  {
 		}
 
-		std::function<void(const Cluster &cluster)> on_close_bar;				/**< Функция обратного вызова в момент закрытия бара */
-		std::function<void(const Cluster &cluster)> on_unformed_bar = nullptr;	/**< Функция обратного вызова для несформированного бара */
+		std::function<void(const Cluster &cluster)> on_close_bar;			/**< 柱线关闭时的回调函数 */
+		std::function<void(const Cluster &cluster)> on_unformed_bar = nullptr;	/**< 未形成柱线的回调函数 */
 
-		/** \brief Обновить состояние индикатора
-		 * \param input		Текущая цена
-		 * \param timestamp Метка времени в секундах
+		/** \brief 更新指标状态
+		 * \param input		当前价格
+		 * \param timestamp 时间戳（秒）
 		 */
 		int update(const double input, const uint64_t timestamp) noexcept {
 			if(period == 0) return common::NO_INIT;
@@ -233,7 +233,7 @@ namespace xtechnical {
 			return sum / (std::sqrt(sum_x) * std::sqrt(sum_y));
 		}
 
-		/** \brief Очистить данные индикатора
+		/** \brief 清除指标数据
 		 */
 		inline void clear() noexcept {
 			cluster = Cluster();

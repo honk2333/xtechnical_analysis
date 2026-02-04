@@ -5,7 +5,7 @@
 
 namespace xtechnical {
 
-    /** \brief Истинный диапазон (True Range)
+    /** \brief 真实范围 (True Range)
      */
     template <typename T>
     class TrueRange {
@@ -27,9 +27,9 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param in 	Сигнал на входе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param in 	输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int update(const T in) noexcept {
             if (std::isnan(last_data)) {
@@ -41,10 +41,10 @@ namespace xtechnical {
 			return common::OK;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param in    Сигнал на входе
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param in    输入信号
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int update(const T in, T &out) noexcept {
             const int err = update(in);
@@ -63,12 +63,12 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данная функция отличается от update тем,
-         * что не влияет на внутреннее состояние индикатора
-         * \param in сигнал на входе
-         * \return вернет 0 в случае успеха, иначе см. ErrorType
+         * 此函数与update不同，
+         * 不会影响指标的内部状态
+         * \param in 输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int test(const T in) noexcept {
             if (std::isnan(last_data)) return common::NO_INIT;
@@ -76,13 +76,13 @@ namespace xtechnical {
 			return common::OK;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данная функция отличается от update тем,
-         * что не влияет на внутреннее состояние индикатора
-         * \param in    Сигнал на входе
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+         * 此函数与update不同，
+         * 不会影响指标的内部状态
+         * \param in    输入信号
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int test(const T in, T &out) noexcept {
             const int err = test(in);
@@ -90,14 +90,14 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         inline void clear() noexcept {
             output_value = std::numeric_limits<T>::quiet_NaN();

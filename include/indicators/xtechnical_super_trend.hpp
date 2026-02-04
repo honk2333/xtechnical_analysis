@@ -7,7 +7,7 @@
 
 namespace xtechnical {
 
-    /** \brief Индекс товарного канала
+    /** \brief 超级趋势指标
      */
     template <typename T, class MA_TYPE>
     class SuperTrend {
@@ -20,10 +20,10 @@ namespace xtechnical {
 
         SuperTrend() {};
 
-        /** \brief Конструктор класса индикатора SuperTrend
-         * \param   period_cci  Период CCI. Стандартное значение 50
-         * \param   period_atr  Период ATR. Стандартное значение 5
-         * \param   coeff_cci   Коэффициент CCI, по умолчанию 0.015
+        /** \brief SuperTrend指标类构造函数
+         * \param   period_cci  CCI周期. 标准值为50
+         * \param   period_atr  ATR周期. 标准值为5
+         * \param   coeff_cci   CCI系数, 默认值为0.015
          */
         SuperTrend(const size_t period_cci, const size_t period_atr, const T coeff_cci = 0.015) :
             iCCI(period_cci, coeff_cci), iATR(period_atr) {
@@ -97,21 +97,21 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Получить значение индикатора CCI
-         * \return Значение индикатора
+        /** \brief 获取CCI指标值
+         * \return CCI指标值
          */
         inline T get_cci() const noexcept {
             return output_cci;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         inline void clear() noexcept {
             iCCI.clear();

@@ -5,7 +5,7 @@
 
 namespace xtechnical {
 
-    /** \brief Индекс относительной силы (RSI)
+    /** \brief 相对强弱指标 (RSI)
      */
     template <typename T, class MA_TYPE>
     class RSI {
@@ -20,15 +20,15 @@ namespace xtechnical {
 
         RSI() {}
 
-        /** \brief Инициализировать индикатор индекса относительной силы
-         * \param period период индикатора
+        /** \brief 初始化相对强弱指标
+         * \param period 指标周期
          */
         RSI(const size_t period) :
             iU(period), iD(period) {
         }
 
-        /** \brief Инициализировать индикатор индекса относительной силы
-         * \param period Период индикатора
+        /** \brief 初始化相对强弱指标
+         * \param period 指标周期
          */
         inline void init(const size_t period) noexcept {
             is_update_ = false;
@@ -36,9 +36,9 @@ namespace xtechnical {
             iD = MA_TYPE(period);
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param in сигнал на входе
-         * \return вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param in 输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T in) noexcept {
             if(!is_update_) {
@@ -71,10 +71,10 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param in    Сигнал на входе
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param in    输入信号
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T in, T &out) noexcept {
             const int err = update(in);
@@ -82,11 +82,11 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данная функция отличается от update тем, что не влияет на внутреннее состояние индикатора
-         * \param in сигнал на входе
-         * \return вернет 0 в случае успеха, иначе см. ErrorType
+         * 此函数与update不同，不会影响指标的内部状态
+         * \param in 输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(const T in) noexcept {
             if(!is_update_) {
@@ -116,13 +116,13 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данная функция отличается от update тем,
-         * что не влияет на внутреннее состояние индикатора
-         * \param in    Сигнал на входе
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+         * 此函数与update不同，
+         * 不会影响指标的内部状态
+         * \param in    输入信号
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(const T in, T &out) noexcept {
             const int err = test(in);
@@ -130,14 +130,14 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         void clear() noexcept {
             output_value = std::numeric_limits<T>::quiet_NaN();

@@ -6,7 +6,7 @@
 
 namespace xtechnical {
 
-	/** \brief Уровни по фракталам Билла Вильямса
+	/** \brief 比尔·威廉姆斯分形水平
 	 */
 	template <typename T>
 	class FractalsLevel {
@@ -26,12 +26,12 @@ namespace xtechnical {
 
 		FractalsLevel() : buffer_up(3), buffer_dn(3) {};
 
-		/** \brief Обновить состояние индикатора
-		 * \param high		Максимальное значение бара
-		 * \param low		Минимальное значение бара
-		 * \param on_up		Функция обратного вызова для верхнего уровня
-		 * \param on_dn		Функция обратного вызова для нижнего уровня
-		 * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 更新指标状态
+		 * \param high		K线最高价
+		 * \param low		K线最低价
+		 * \param on_up		上部分形的回调函数
+		 * \param on_dn		下部分形的回调函数
+		 * \return 成功返回0，否则参见ErrorType
 		 */
 		int update(
 				const T high, 
@@ -79,12 +79,12 @@ namespace xtechnical {
 			return common::OK;
 		}
 
-		/** \brief Протестировать индикатор
-		 * \param high		Максимальное значение бара
-		 * \param low		Минимальное значение бара
-		 * \param on_up		Функция обратного вызова для верхнего уровня
-		 * \param on_dn		Функция обратного вызова для нижнего уровня
-		 * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 测试指标
+		 * \param high		K线最高价
+		 * \param low		K线最低价
+		 * \param on_up		上部分形的回调函数
+		 * \param on_dn		下部分形的回调函数
+		 * \return 成功返回0，否则参见ErrorType
 		 */
 		int test(
 				const T high, 
@@ -132,21 +132,21 @@ namespace xtechnical {
 			return common::OK;
 		}
 
-		/** \brief Получить значение нижнего фрактала
-		 * \return Значение нижнего фрактала
+		/** \brief 获取上部分形值
+		 * \return 上部分形值
 		 */
 		inline T get_up() const noexcept {
 			return output_up;
 		}
 
-		/** \brief Получить значение верхнего фрактала
-		 * \return Значение верхнего фрактала
+		/** \brief 获取下部分形值
+		 * \return 下部分形值
 		 */
 		inline T get_dn() const noexcept {
 			return output_dn;
 		}
 
-		/** \brief Очистить данные индикатора
+		/** \brief 清除指标数据
 		 */
 		inline void clear() noexcept {
 			fractals.clear();

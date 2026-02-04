@@ -5,7 +5,7 @@
 
 namespace xtechnical {
 
-    /** \brief Фильтр размера тела бара
+    /** \brief 柱体大小过滤器
      */
     template <typename T, class MA_TYPE>
     class BodyFilter {
@@ -56,14 +56,14 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         inline void clear() noexcept {
             output_value = std::numeric_limits<T>::quiet_NaN();

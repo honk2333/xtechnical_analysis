@@ -5,7 +5,7 @@
 
 namespace xtechnical {
 
-    /** \brief Статистика за период
+    /** \brief 周期统计
      */
     template<class T>
     class PeriodStatsV1 {
@@ -27,16 +27,16 @@ namespace xtechnical {
 
         PeriodStatsV1() {};
 
-        /** \brief Конструктор
-         * \param user_life_time Время хранения данных
+        /** \brief 构造函数
+         * \param user_life_time 数据存储时间
          */
         PeriodStatsV1(const uint64_t user_life_time) :
             life_time(user_life_time) {
         }
 
-        /** \brief Добавить значение
-         * \param value     Значение
-         * \param time      Время значения
+        /** \brief 添加值
+         * \param value     值
+         * \param time      值的时间
          */
         inline void add(const int value, const uint64_t time) noexcept {
             data[time] = value;
@@ -46,13 +46,13 @@ namespace xtechnical {
             if (start_time == 0) start_time = time;
         }
 
-        /** \brief Проверить наличие данных
+        /** \brief 检查数据是否存在
          */
         inline bool empty() noexcept {
             return data.empty();
         }
 
-        /** \brief Получить максимальное значение
+        /** \brief 获取最大值
          */
         inline T get_max_value() noexcept {
             T max_values = std::numeric_limits<T>::lowest();
@@ -62,7 +62,7 @@ namespace xtechnical {
             return max_values;
         }
 
-        /** \brief Получить минимальное
+        /** \brief 获取最小值
          */
         inline T get_min_value() noexcept {
             T min_value = std::numeric_limits<T>::max();
@@ -72,7 +72,7 @@ namespace xtechnical {
             return min_value;
         }
 
-        /** \brief Получить значение с максимальным весом
+        /** \brief 获取权重最大的值
          */
         inline T get_max_weight() noexcept {
             std::multiset<T> counter;
@@ -89,7 +89,7 @@ namespace xtechnical {
             return value;
         }
 
-        /** \brief Получить центр масс
+        /** \brief 获取质量中心
          */
         inline T get_center_mass() noexcept {
             T sum = 0;
@@ -99,8 +99,8 @@ namespace xtechnical {
             return sum / data.size();
         }
 
-        /** \brief Проверить заполненность данными
-         * \return Вернет true, если данные зполнены
+        /** \brief 检查数据是否填满
+         * \return 如果数据填满则返回true
          */
         inline bool init() noexcept {
             const uint64_t diff = (last_time - start_time);
@@ -113,7 +113,7 @@ namespace xtechnical {
         }
     };
 
-    /** \brief Статистика за период
+    /** \brief 周期统计
      */
     class PeriodStatsV2 {
     private:
@@ -142,17 +142,17 @@ namespace xtechnical {
 
         PeriodStatsV2() {};
 
-        /** \brief Конструктор
-         * \param user_life_time Время хранения данных
+        /** \brief 构造函数
+         * \param user_life_time 数据存储时间
          */
         PeriodStatsV2(const uint64_t user_life_time) :
             life_time(user_life_time) {
         }
 
-        /** \brief Добавить значение
-         * \param value     Значение
-         * \param time      Время значения
-         * \param result    Результат прогноза (1 - удачный, -1 - неудачный)
+        /** \brief 添加值
+         * \param value     值
+         * \param time      值的时间
+         * \param result    预测结果 (1 - 成功, -1 - 失败)
          */
         inline void add(const int value, const uint64_t time, const int result) noexcept {
             // добавляем статистику
@@ -180,13 +180,13 @@ namespace xtechnical {
             if (start_time == 0) start_time = time;
         }
 
-        /** \brief Проверить наличие данных
+        /** \brief 检查数据是否存在
          */
         inline bool empty() noexcept {
             return !data.empty();
         }
 
-        /** \brief Получить максимальное значение
+        /** \brief 获取最大值
          */
         inline int get_max_value() noexcept {
             int max_values = std::numeric_limits<int>::min();
@@ -196,7 +196,7 @@ namespace xtechnical {
             return max_values;
         }
 
-        /** \brief Класс для хранения статистики
+        /** \brief 用于存储统计数据的类
          */
         class Stats {
         public:
@@ -328,8 +328,8 @@ namespace xtechnical {
             return std::move(stats);
         };
 
-        /** \brief Проверить заполненность данными
-         * \return Вернет true, если данные зполнены
+        /** \brief 检查数据是否填满
+         * \return 如果数据填满则返回true
          */
         inline bool init() noexcept {
             const uint64_t diff = (last_time - start_time);

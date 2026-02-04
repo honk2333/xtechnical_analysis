@@ -20,17 +20,17 @@ namespace xtechnical {
 
         FisherV1() {}
 
-        /** \brief Конструктор Fisher Transform Indicator
-         * \param period	Период индикатора
+        /** \brief Fisher Transform Indicator构造函数
+         * \param period\t指标周期
          */
         FisherV1(const size_t period) :
             max_high(period), min_low(period) {
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param high	Наивысшая цена бара
-		 * \param low 	Наинизшая цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param high\tK线最高价
+	 * \param low \tK线最低价
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T high, const T low) noexcept {
 			max_high.update(high);
@@ -54,11 +54,11 @@ namespace xtechnical {
             return common::OK;
         }
 
-		/** \brief Обновить состояние индикатора
-         * \param high	Наивысшая цена бара
-		 * \param low 	Наинизшая цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 更新指标状态
+         * \param high\tK线最高价
+	 * \param low \tK线最低价
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
 		inline int update(const T high, const T low, T &out) noexcept {
             const int err = update(high, low);
@@ -66,18 +66,18 @@ namespace xtechnical {
             return err;
         }
 
-		/** \brief Обновить состояние индикатора
-         * \param price	Цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 更新指标状态
+         * \param price\tK线价格
+         * \return 成功返回0，否则参见ErrorType
          */
 		inline int update(const T price) noexcept {
 			return update(price, price);
 		}
 
-        /** \brief Обновить состояние индикатора
-         * \param price	Цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param price\tK线价格
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int update(const T price, T &out) noexcept {
             const int err = update(price);
@@ -85,10 +85,10 @@ namespace xtechnical {
             return err;
         }
 
-		/** \brief Протестировать индикатор
-         * \param high	Наивысшая цена бара
-		 * \param low 	Наинизшая цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 测试指标
+         * \param high\tK线最高价
+	 * \param low \tK线最低价
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(const T high, const T low) noexcept {
 			max_high.test(high);
@@ -110,11 +110,11 @@ namespace xtechnical {
             return common::OK;
         }
 
-		/** \brief Протестировать индикатор
-         * \param high	Наивысшая цена бара
-		 * \param low 	Наинизшая цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 测试指标
+         * \param high\tK线最高价
+	 * \param low \tK线最低价
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
 		inline int test(const T high, const T low, T &out) noexcept {
             const int err = test(high, low);
@@ -122,18 +122,18 @@ namespace xtechnical {
             return common::OK;
         }
 
-		/** \brief Протестировать индикатор
-         * \param price	Цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 测试指标
+         * \param price\tK线价格
+         * \return 成功返回0，否则参见ErrorType
          */
 		inline int test(const T price) noexcept {
 			return test(price, price);
 		}
 
-        /** \brief Протестировать индикатор
-         * \param price	Цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 测试指标
+         * \param price\tK线价格
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int test(const T price, T &out) noexcept {
             const int err = test(price);
@@ -141,14 +141,14 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         void clear() noexcept {
             output_value = std::numeric_limits<T>::quiet_NaN();
@@ -172,16 +172,16 @@ namespace xtechnical {
 
         FisherV2() {}
 
-        /** \brief Конструктор Fisher Transform Indicator
-         * \param period	Период индикатора
+        /** \brief Fisher Transform Indicator构造函数
+         * \param period\t指标周期
          */
         FisherV2(const size_t period) :
             min_max(period) {
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param price	Цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param price\tK线价格
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T price) noexcept {
 			min_max.update(price);
@@ -203,10 +203,10 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param price	Цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param price\tK线价格
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int update(const T price, T &out) noexcept {
             const int err = update(price);
@@ -214,9 +214,9 @@ namespace xtechnical {
             return err;
         }
 
-		/** \brief Протестировать индикатор
-         * \param price	Цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 测试指标
+         * \param price\tK线价格
+         * \return 成功返回0，否则参见ErrorType
          */
 		int test(const T price) noexcept {
 			min_max.test(price);
@@ -235,10 +235,10 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Протестировать индикатор
-         * \param price	Цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 测试指标
+         * \param price\tK线价格
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int test(const T price, T &out) noexcept {
             const int err = test(price);
@@ -246,14 +246,14 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         void clear() noexcept {
             output_value = std::numeric_limits<T>::quiet_NaN();
@@ -274,16 +274,16 @@ namespace xtechnical {
 
         FisherV3() {}
 
-        /** \brief Конструктор Fisher Transform Indicator
-         * \param period	Период индикатора
+        /** \brief Fisher Transform Indicator构造函数
+         * \param period\t指标周期
          */
         FisherV3(const size_t period) :
             min_max(period) {
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param price	Цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param price\tK线价格
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T price) noexcept {
 			min_max.update(price);
@@ -298,10 +298,10 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param price	Цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param price\tK线价格
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int update(const T price, T &out) noexcept {
             const int err = update(price);
@@ -309,9 +309,9 @@ namespace xtechnical {
             return err;
         }
 
-		/** \brief Протестировать индикатор
-         * \param price	Цена бара
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+		/** \brief 测试指标
+         * \param price\tK线价格
+         * \return 成功返回0，否则参见ErrorType
          */
 		int test(const T price) noexcept {
 			min_max.test(price);
@@ -326,10 +326,10 @@ namespace xtechnical {
             return common::OK;
         }
 
-        /** \brief Протестировать индикатор
-         * \param price	Цена бара
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 测试指标
+         * \param price\tK线价格
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         inline int test(const T price, T &out) noexcept {
             const int err = test(price);
@@ -337,14 +337,14 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         void clear() noexcept {
             output_value = std::numeric_limits<T>::quiet_NaN();

@@ -6,8 +6,8 @@
 
 namespace xtechnical {
 
-    /** \brief Быстрый алгоритм поиска Min и Max
-     * Оригинал: https://arxiv.org/abs/cs/0610046v5
+    /** \brief 快速查找最小值和最大值算法
+     * 原始来源: https://arxiv.org/abs/cs/0610046v5
      */
     template <class T>
     class FastMinMax {
@@ -68,11 +68,11 @@ namespace xtechnical {
             return common::INDICATOR_NOT_READY_TO_WORK;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param input     Сигнал на входе
-         * \param min_value Минимальный сигнал на выходе за период
-         * \param max_value Максимальный сигнал на выходе за период
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param input     输入信号
+         * \param min_value 周期内的最小输出信号
+         * \param max_value 周期内的最大输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T input, T &min_value, T &max_value) noexcept {
             const int err = update(input);
@@ -81,11 +81,11 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данная функция отличается от update тем, что не влияет на внутреннее состояние индикатора
-         * \param input     Сигнал на входе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+         * 此函数与update不同，不会影响指标的内部状态
+         * \param input     输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(T input) noexcept {
             if(delay_line.test(input) != common::OK) {
@@ -123,13 +123,13 @@ namespace xtechnical {
             return common::INDICATOR_NOT_READY_TO_WORK;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данная функция отличается от update тем, что не влияет на внутреннее состояние индикатора
-         * \param input     Сигнал на входе
-         * \param min_value Минимальный сигнал на выходе за период
-         * \param max_value Максимальный сигнал на выходе за период
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+         * 此函数与update不同，不会影响指标的内部状态
+         * \param input     输入信号
+         * \param min_value 周期内的最小输出信号
+         * \param max_value 周期内的最大输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(const T input, T &min_value, T &max_value) {
             const int err = test(input);
@@ -138,21 +138,21 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить минимальное значение индикатора
-         * \return Минимальное значение индикатора
+        /** \brief 获取指标的最小值
+         * \return 指标的最小值
          */
         inline T get_min() const noexcept {
             return output_min_value;
         }
 
-        /** \brief Получить максимальное значение индикатора
-         * \return Максимальное значение индикатора
+        /** \brief 获取指标的最大值
+         * \return 指标的最大值
          */
         inline T get_max() const noexcept {
             return output_max_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         inline void clear() noexcept {
             output_min_value = std::numeric_limits<T>::quiet_NaN();

@@ -6,7 +6,7 @@
 
 namespace xtechnical {
 
-    /** \brief Индекс товарного канала
+    /** \brief 商品通道指数 (Commodity Channel Index)
      */
     template <typename T, class MA_TYPE>
     class CCI {
@@ -87,14 +87,14 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Получить значение индикатора
-         * \return Значение индикатора
+        /** \brief 获取指标值
+         * \return 指标值
          */
         inline T get() const noexcept {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         inline void clear() noexcept {
             ma.clear();

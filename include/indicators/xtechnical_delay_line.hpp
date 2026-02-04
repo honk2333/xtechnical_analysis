@@ -6,7 +6,7 @@
 
 namespace xtechnical {
 
-     /** \brief Линия задержки
+     /** \brief 延迟线
      */
     template <typename T>
     class DelayLine {
@@ -18,16 +18,16 @@ namespace xtechnical {
 
         DelayLine() : buffer() {};
 
-        /** \brief Конструктор линии задержки
-         * \param p     Период
+        /** \brief 延迟线构造函数
+         * \param p     周期
          */
         DelayLine(const size_t p) :
             buffer(p + 1), period(p) {
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param in    Сигнал на входе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param in    输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T in) noexcept {
             if(period == 0) {
@@ -44,10 +44,10 @@ namespace xtechnical {
             return common::INDICATOR_NOT_READY_TO_WORK;
         }
 
-        /** \brief Обновить состояние индикатора
-         * \param in    Сигнал на входе
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+        /** \brief 更新指标状态
+         * \param in    输入信号
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int update(const T in, T &out) noexcept {
             const int err = update(in);
@@ -55,12 +55,12 @@ namespace xtechnical {
             return err;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данный метод отличается от update тем,
-         * что не влияет на внутреннее состояние индикатора
-         * \param in    Сигнал на входе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+         * 此方法与update不同，
+         * 不会影响指标的内部状态
+         * \param in    输入信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(const T in) noexcept {
             if(period == 0) {
@@ -77,13 +77,13 @@ namespace xtechnical {
             return common::INDICATOR_NOT_READY_TO_WORK;
         }
 
-        /** \brief Протестировать индикатор
+        /** \brief 测试指标
          *
-         * Данный метод отличается от update тем,
-         * что не влияет на внутреннее состояние индикатора
-         * \param in    Сигнал на входе
-         * \param out   Сигнал на выходе
-         * \return Вернет 0 в случае успеха, иначе см. ErrorType
+         * 此方法与update不同，
+         * 不会影响指标的内部状态
+         * \param in    输入信号
+         * \param out   输出信号
+         * \return 成功返回0，否则参见ErrorType
          */
         int test(const T in, T &out) noexcept {
             const int err = test(in);
@@ -95,7 +95,7 @@ namespace xtechnical {
             return output_value;
         }
 
-        /** \brief Очистить данные индикатора
+        /** \brief 清除指标数据
          */
         inline void clear() noexcept {
             buffer.clear();
