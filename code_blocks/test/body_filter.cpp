@@ -1,5 +1,9 @@
 #include <iostream>
-#include "xtechnical_indicators.hpp"
+#include <limits>
+#include "xtechnical_circular_buffer.hpp"
+#include "xtechnical_common.hpp"
+#include "indicators/xtechnical_body_filter.hpp"
+#include "indicators/xtechnical_sma.hpp"
 #include <random>
 #include <array>
 

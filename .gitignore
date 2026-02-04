@@ -3,4 +3,6 @@
 *.o
 *testing/*/bin
 *code_blocks/*/bin
+build/*
+*.png
 

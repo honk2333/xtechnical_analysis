@@ -3,10 +3,14 @@
 
 #include "../xtechnical_common.hpp"
 #include <vector>
+
+#ifndef NO_EIGEN
 #include <Eigen/Dense>
+#endif
 
 namespace xtechnical {
 
+#ifndef NO_EIGEN
     template<class T = double>
     class SSA {
     public:
@@ -395,6 +399,84 @@ namespace xtechnical {
         }
 
     };
+#endif
+
+#ifndef NO_EIGEN
 }; // xtechnical
+#else
+    // 当没有Eigen库时，提供一个空实现
+    template<class T = double>
+    class SSA {
+    public:
+
+        enum class SSAMode {
+            RestoredSeriesAddition,
+            OriginalSeriesAddition,
+            OriginalSeriesForecast,
+        };
+
+        enum class MetricType {
+            None,
+            MAE,
+            MSE,
+            RSquared,
+        };
+
+    private:
+        std::vector<T> m_reconstructed;
+        std::vector<T> m_forecast;
+        T m_metric = 0;
+
+    public:
+
+        SSA() {};
+
+        SSA(const size_t window_len) {}
+
+        template<class InputType = double>
+        inline bool update(const InputType in, const common::PriceType type = common::PriceType::Close) noexcept {
+            return false;
+        }
+
+        inline void clear() noexcept {
+            m_reconstructed.clear();
+            m_forecast.clear();
+            m_metric = 0;
+        }
+
+        inline const bool full() noexcept {
+            return false;
+        }
+
+        bool calc(const size_t horizon,
+                  const size_t start_period,
+                  const size_t num_period,
+                  const size_t step_period,
+                  const MetricType metric = MetricType::None,
+                  const bool ssa_rec = false,
+                  const SSAMode mode = SSAMode::RestoredSeriesAddition,
+                  const size_t r = 0) {
+            return false;
+        }
+
+        inline const T get_last_forecast() {
+            return std::numeric_limits<T>::quiet_NaN();
+        }
+
+        inline const std::vector<T> &get_forecast() {
+            return m_forecast;
+        }
+
+        inline const std::vector<T> &get_reconstructed() {
+            return m_reconstructed;
+        }
+
+        inline const T get_metric() {
+            return m_metric;
+        }
+
+    };
+};
+#endif
 
 #endif // XTECHNICAL_SSA_HPP_INCLUDED

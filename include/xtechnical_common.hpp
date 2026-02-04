@@ -34,6 +34,7 @@
 #include <functional>
 #include <numeric>
 #include <cmath>
+#include <limits>
 
 namespace xtechnical {
     namespace common {
